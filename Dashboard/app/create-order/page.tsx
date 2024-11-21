@@ -1,131 +1,71 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import createDeclaration from "../components/OrderCreation/createDeclaration";
 
-const products = [
-  {
-    id: 1,
-    name: "Cotton T-Shirt",
-    hsnCode: "61091000",
-    mrp: 1000,
-    mrpUnit: "INR",
-    dimensions: {
-      length: 28,
-      width: 20,
-      height: 2,
-      weight: 0.2,
-      unit: "cm",
-      weightUnit: "kg",
-    },
-    variants: {
-      colors: ["Red", "Blue", "Black"],
-      sizes: ["S", "M", "L", "XL"],
-    },
-    customsInfo: {
-      description: "100% Cotton T-Shirt",
-      materialComposition: "Cotton",
-      category: [
-        "Apparel",
-        "Clothing",
-        "Textile",
-        "Garment",
-        "Cotton",
-        "T-Shirt",
-        "Men",
-        "Women",
-        "Kids",
-        "Unisex",
-      ],
-    },
-    manufacturingInfo: {
-      date: "2024-01-01",
-      manufacturingCountry: "India",
-      manufacturingState: "Delhi",
-    },
-  },
-  {
-    id: 2,
-    name: "Denim Jeans",
-    hsnCode: "62034200",
-    mrp: 2000,
-    mrpUnit: "INR",
-    dimensions: {
-      length: 40,
-      width: 30,
-      height: 3,
-      weight: 0.8,
-      unit: "cm",
-      weightUnit: "kg",
-    },
-    variants: {
-      colors: ["Blue", "Black", "Gray"],
-      sizes: ["28", "30", "32", "34", "36", "38"],
-    },
-    customsInfo: {
-      description: "High-Quality Denim Jeans",
-      materialComposition: "Denim",
-      category: [
-        "Apparel",
-        "Clothing",
-        "Textile",
-        "Garment",
-        "Denim",
-        "Jeans",
-        "Men",
-        "Women",
-        "Unisex",
-      ],
-    },
-    manufacturingInfo: {
-      date: "2024-02-15",
-      manufacturingCountry: "India",
-      manufacturingState: "Maharashtra",
-    },
-  },
-  {
-    id: 3,
-    name: "Baseball Cap",
-    hsnCode: "65050090",
-    mrp: 500,
-    mrpUnit: "INR",
-    dimensions: {
-      length: 25,
-      width: 18,
-      height: 12,
-      weight: 0.15,
-      unit: "cm",
-      weightUnit: "kg",
-    },
-    variants: {
-      colors: ["Red", "Blue", "Black", "White"],
-      sizes: ["One Size Fits All"],
-    },
-    customsInfo: {
-      description: "Cotton Baseball Cap",
-      materialComposition: "Cotton",
-      category: [
-        "Apparel",
-        "Clothing",
-        "Accessories",
-        "Textile",
-        "Cap",
-        "Men",
-        "Women",
-        "Unisex",
-      ],
-      customDuties: {
-        // dutyRate: "10%",
-        // requiredFields: ["materialComposition", "brandName", "retailPrice"]
-      },
-    },
-    manufacturingInfo: {
-      date: "2024-03-10",
-      manufacturingCountry: "India",
-      manufacturingState: "Tamil Nadu",
-    },
-  },
-];
+// fetch("/products.json")
+//   .then((response) => response.json()) // Parse the response as JSON
+//   .then((data) => setProducts(data)) // Set the data to state
+//   .catch((error) => console.error("Error loading JSON data:", error));
+
+// ! ADD RODTEP CALCULATOR TOO
+async function getCustomDutiesFromPublic(categories) {
+  try {
+    // Fetch the JSON file from the public folder
+    const response = await fetch("/customsRequirement.json"); // Adjust the file name if necessary
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const customDutiesData = await response.json();
+
+    // Extract duties based on categories
+    const duties = {};
+    categories.forEach((category) => {
+      // Iterate over the keys of productType
+      for (const productCategory in customDutiesData.productType) {
+        if (productCategory.includes(category)) {
+          // Check if the category already exists in duties
+          if (!duties[category]) {
+            // Initialize it as an array if it doesn't exist
+            duties[category] = [];
+          }
+
+          // Add the custom duty to the corresponding category
+          duties[category].push(
+            customDutiesData.productType[productCategory].requirements
+              .customDuties
+          );
+        }
+      }
+    });
+    return duties;
+  } catch (error) {
+    console.error("Error fetching custom duties:", error);
+    return {};
+  }
+}
+
+// ! Example categories
+const customsInfo = {
+  category: [
+    "Apparel",
+    "Clothing",
+    "Accessories",
+    "Textile",
+    "Cap",
+    "Men",
+    "Women",
+    "Unisex",
+  ],
+};
+getCustomDutiesFromPublic(customsInfo.category).then((duties) => {
+  // console.log("Custom Duties:", duties);
+  for (const category in duties) {
+    console.log(category, duties[category]);
+  }
+});
 
 const warehouseAddresses = [
   {
@@ -159,7 +99,16 @@ const warehouseAddresses = [
 ];
 
 const AddressForm = ({ type, formData, setFormData }) => {
-  const handleChange = () => {};
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [`${type}Address`]: {
+        ...prev[`${type}Address`],
+        [name]: value,
+      },
+    }));
+  };
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div>
@@ -353,12 +302,65 @@ const CreateOrderForm = () => {
   });
 
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [declaration, setDeclaration] = useState({});
 
   const handleProductSelect = () => {};
 
   const handleWarehouseSelect = () => {};
 
-  const handleSubmit = () => {};
+  // const createDeclaration = () => {
+  //   // declaration["contents_type"] = "NIL";
+  //   console.log(declaration);
+  // };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createDeclaration({
+      formData,
+      selectedProduct,
+      declaration,
+      setDeclaration,
+    });
+
+    // !
+    // console.log(formData);
+  };
+
+  useEffect(() => {
+    async function getProducts() {
+      try {
+        const response = await fetch("/products.json"); // Adjust the file name if necessary
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const products = await response.json();
+        console.log(products); // Log the fetched products
+        setProducts(products); // Set the fetched products to state
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    }
+
+    async function getDeclaration() {
+      try {
+        const response = await fetch("/orderDeclarationTemplate.json"); // Adjust the file name if necessary
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const declarationTemplate = await response.json();
+        console.log(declarationTemplate); // Log the fetched declarationTemplate
+        setDeclaration(declarationTemplate); // Set the fetched declarationTemplate to state
+      } catch (error) {
+        console.error("Error fetching declarationTemplate:", error);
+      }
+    }
+
+    getProducts(); // Call the function to fetch products
+    getDeclaration();
+  }, []); // Empty dependency array to run only once after the initial render
 
   return (
     <div className="min-h-screen bg-[#EAEDED]">

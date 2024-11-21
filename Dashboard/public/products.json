@@ -1,0 +1,186 @@
+[
+  {
+    "id": 1,
+    "name": "Cotton T-Shirt",
+    "brandName": "StyleWear",
+    "productDescription": "A comfortable and stylish 100% cotton T-shirt available in multiple colors and sizes. Perfect for casual wear.",
+    "modelNo": "TS1001",
+    "hsnCode": "61091000",
+    "mrp": 1000,
+    "mrpUnit": "INR",
+    "dimensions": {
+      "length": 28,
+      "width": 20,
+      "height": 2,
+      "weight": 0.2,
+      "unit": "cm",
+      "weightUnit": "kg"
+    },
+    "variants": {
+      "colors": ["Red", "Blue", "Black"],
+      "sizes": ["S", "M", "L", "XL"]
+    },
+    "customsInfo": {
+      "description": "100% Cotton T-Shirt",
+      "materialComposition": "Cotton",
+      "category": [
+        "Apparel",
+        "Clothing",
+        "Textile",
+        "Garment",
+        "Cotton",
+        "T-Shirt",
+        "Men",
+        "Women",
+        "Kids",
+        "Unisex"
+      ]
+    },
+    "manufacturingInfo": {
+      "date": "2024-01-01",
+      "manufacturingCountry": "India",
+      "manufacturingState": "Delhi"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Denim Jeans",
+    "brandName": "DenimHub",
+    "productDescription": "Classic fit denim jeans crafted from durable denim fabric. Designed for comfort and style with a variety of color options.",
+    "modelNo": "DJ2024",
+    "hsnCode": "62034200",
+    "mrp": 2000,
+    "mrpUnit": "INR",
+    "dimensions": {
+      "length": 40,
+      "width": 30,
+      "height": 3,
+      "weight": 0.8,
+      "unit": "cm",
+      "weightUnit": "kg"
+    },
+    "variants": {
+      "colors": ["Blue", "Black", "Gray"],
+      "sizes": ["28", "30", "32", "34", "36", "38"]
+    },
+    "customsInfo": {
+      "description": "High-Quality Denim Jeans",
+      "materialComposition": "Denim",
+      "category": [
+        "Apparel",
+        "Clothing",
+        "Textile",
+        "Garment",
+        "Denim",
+        "Jeans",
+        "Men",
+        "Women",
+        "Unisex"
+      ]
+    },
+    "manufacturingInfo": {
+      "date": "2024-02-15",
+      "manufacturingCountry": "India",
+      "manufacturingState": "Maharashtra"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Baseball Cap",
+    "brandName": "CapMasters",
+    "productDescription": "A trendy cotton baseball cap to complement your casual look. Available in various colors with an adjustable fit.",
+    "modelNo": "BC500",
+    "hsnCode": "65050090",
+    "mrp": 500,
+    "mrpUnit": "INR",
+    "dimensions": {
+      "length": 25,
+      "width": 18,
+      "height": 12,
+      "weight": 0.15,
+      "unit": "cm",
+      "weightUnit": "kg"
+    },
+    "variants": {
+      "colors": ["Red", "Blue", "Black", "White"],
+      "sizes": ["One Size Fits All"]
+    },
+    "customsInfo": {
+      "description": "Cotton Baseball Cap",
+      "materialComposition": "Cotton",
+      "category": [
+        "Apparel",
+        "Clothing",
+        "Accessories",
+        "Textile",
+        "Cap",
+        "Men",
+        "Women",
+        "Unisex"
+      ]
+    },
+    "manufacturingInfo": {
+      "date": "2024-03-10",
+      "manufacturingCountry": "India",
+      "manufacturingState": "Tamil Nadu"
+    }
+  },
+  {
+    "id": 4,
+    "name": "Wooden Table",
+    "brandName": "HomeDeco",
+    "productDescription": "A premium wooden table designed for your home or office, offering durability and style with fine craftsmanship.",
+    "modelNo": "WT2024",
+    "hsnCode": "94036000",
+    "mrp": 5000,
+    "mrpUnit": "INR",
+    "dimensions": {
+      "length": 120,
+      "width": 60,
+      "height": 75,
+      "weight": 20,
+      "unit": "cm",
+      "weightUnit": "kg"
+    },
+    "warranty": "2 years",
+    "customsInfo": {
+      "description": "Premium Wooden Table",
+      "materialComposition": "Wood",
+      "category": ["Furniture", "Table", "Wooden"]
+    },
+    "manufacturingInfo": {
+      "date": "2024-03-01",
+      "manufacturingCountry": "India",
+      "manufacturingState": "Punjab"
+    }
+  },
+  {
+    "id": 5,
+    "name": "Office Chair",
+    "brandName": "WorkEase",
+    "productDescription": "An ergonomic office chair designed for comfort and productivity with adjustable features and durable materials.",
+    "modelNo": "OC303",
+    "hsnCode": "94031010",
+    "mrp": 3000,
+    "mrpUnit": "INR",
+    "dimensions": {
+      "length": 60,
+      "width": 60,
+      "height": 120,
+      "weight": 15,
+      "unit": "cm",
+      "weightUnit": "kg"
+    },
+    "warranty": "1 year",
+    "customsInfo": {
+      "description": "Ergonomic Office Chair",
+      "materialComposition": "Plastic and Fabric",
+      "category": ["Furniture", "Chair", "Office"]
+    },
+    "manufacturingInfo": {
+      "date": "2024-04-01",
+      "manufacturingCountry": "India",
+      "manufacturingState": "Haryana"
+    }
+  }
+]

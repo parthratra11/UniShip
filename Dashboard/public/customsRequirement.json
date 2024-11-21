@@ -1,6 +1,6 @@
 {
   "productType": {
-    "Apparel": {
+    "Apparel, Clothing, Textile, Cap": {
       "requirements": {
         "documents": [
           "Export Invoice",
@@ -23,7 +23,7 @@
         ]
       }
     },
-    "Accessories": {
+    "Accessories, Gadgets": {
       "requirements": {
         "documents": [
           "Export Invoice",
@@ -43,22 +43,6 @@
           "Country of Origin",
           "Care Instructions"
         ]
-      }
-    },
-    "Textiles": {
-      "requirements": {
-        "documents": [
-          "Export Invoice",
-          "Packing List",
-          "Certificate of Origin",
-          "Export Declaration"
-        ],
-        "customDuties": {
-          "dutyRate": "5-15%",
-          "harmonizedSystemCode": "5903, 5209"
-        },
-        "certifications": ["GOTS (if organic)", "OEKO-TEX Standard 100"],
-        "labeling": ["Material Composition", "Country of Origin"]
       }
     },
     "Electronics": {
@@ -89,7 +73,7 @@
         ]
       }
     },
-    "Food and Beverages": {
+    "Food and Beverages, Drinks": {
       "requirements": {
         "documents": [
           "Export Invoice",
@@ -112,7 +96,7 @@
         ]
       }
     },
-    "Pharmaceuticals": {
+    "Pharmaceuticals, Medicines, Drugs": {
       "requirements": {
         "documents": [
           "Export Invoice",
@@ -140,7 +124,7 @@
         ]
       }
     },
-    "Automotive": {
+    "Automotive, Cars, Two-Wheelers, Automobiles": {
       "requirements": {
         "documents": [
           "Export Invoice",
@@ -167,7 +151,7 @@
         ]
       }
     },
-    "Furniture": {
+    "Furniture, Chair, Table, Sofa, Bed, Couch": {
       "requirements": {
         "documents": [
           "Export Invoice",
