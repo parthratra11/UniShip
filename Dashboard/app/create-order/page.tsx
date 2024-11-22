@@ -4,11 +4,6 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import createDeclaration from "../components/OrderCreation/createDeclaration";
 
-// fetch("/products.json")
-//   .then((response) => response.json()) // Parse the response as JSON
-//   .then((data) => setProducts(data)) // Set the data to state
-//   .catch((error) => console.error("Error loading JSON data:", error));
-
 // ! ADD RODTEP CALCULATOR TOO
 async function getCustomDutiesFromPublic(categories) {
   try {
@@ -304,10 +299,61 @@ const CreateOrderForm = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [products, setProducts] = useState([]);
   const [declaration, setDeclaration] = useState({});
+  const [dutyRate, setDutyRate] = useState(0);
 
-  const handleProductSelect = () => {};
+  const handleProductSelect = (productId) => {
+    const product = products.find((p) => p.id === parseInt(productId));
+    if (product) {
+      setSelectedProduct(product);
+      setFormData((prev) => ({
+        ...prev,
+        productId,
+        dimensions: product.dimensions,
+        // customsInfo: {
+        //   ...product.customsInfo,
+        //   additionalParams: ""
+        // }
+      }));
+    }
 
-  const handleWarehouseSelect = () => {};
+    // ! FETCH DUTY RATE FOR SELECTED PRODUCT
+    getCustomDutiesFromPublic(selectedProduct["customsInfo"]["category"]).then(
+      (duties) => {
+        // console.log(duties);
+        for (const category in duties) {
+          console.log(duties[category][0]["dutyRate"]);
+        }
+      }
+    );
+
+    // console.log(
+    //   getCustomDutiesFromPublic(selectedProduct["customsInfo"]["category"])
+    // );
+  };
+
+  const handleWarehouseSelect = (warehouseId) => {
+    const warehouse = warehouseAddresses.find(
+      (w) => w.id === parseInt(warehouseId)
+    );
+    if (warehouse) {
+      setFormData((prev) => ({
+        ...prev,
+        shipperAddress: {
+          street: warehouse.street,
+          locality: warehouse.locality,
+          landmark: warehouse.landmark,
+          city: warehouse.city,
+          state: warehouse.state,
+          country: warehouse.country,
+          zipCode: warehouse.zipCode,
+          contactName: warehouse.contactName,
+          phone: warehouse.phone,
+          email: warehouse.email,
+        },
+      }));
+    }
+    // console.log(formData);
+  };
 
   // const createDeclaration = () => {
   //   // declaration["contents_type"] = "NIL";
@@ -413,7 +459,7 @@ const CreateOrderForm = () => {
                 </div>
               </div>
 
-              {selectedProduct && (
+              {/* {selectedProduct && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-1 text-[#0F1111]">
@@ -463,7 +509,7 @@ const CreateOrderForm = () => {
                     </select>
                   </div>
                 </div>
-              )}
+              )} */}
 
               {/* {selectedProduct && ( */}
               {/* <div className="bg-[#F7F7F7] p-4 rounded border border-[#D5D9D9]">

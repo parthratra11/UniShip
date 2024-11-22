@@ -5,18 +5,7 @@
   "certify": true,
   "certify_signer": "",
   "incoterm": "DDP",
-  "items": [
-    {
-      "description": "",
-      "quantity": 0,
-      "net_weight": "",
-      "mass_unit": "",
-      "value_amount": "",
-      "value_currency": "",
-      "tariff_number": "",
-      "origin_country": ""
-    }
-  ],
+  "items": [],
   "exporter_reference": "",
   "importer_reference": "",
   "address_importer": {
