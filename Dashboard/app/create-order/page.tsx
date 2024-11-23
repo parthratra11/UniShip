@@ -1,7 +1,8 @@
 "use client";
 
+import { UserContext } from "@/app/layout";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import createDeclaration from "../components/OrderCreation/createDeclaration";
 
 // ! ADD RODTEP CALCULATOR TOO
@@ -300,6 +301,7 @@ const CreateOrderForm = () => {
   const [products, setProducts] = useState([]);
   const [declaration, setDeclaration] = useState({});
   const [dutyRate, setDutyRate] = useState(0);
+  const [rodtep, setRodtep] = useState(0.1);
 
   const handleProductSelect = (productId) => {
     const product = products.find((p) => p.id === parseInt(productId));
@@ -316,13 +318,47 @@ const CreateOrderForm = () => {
       }));
     }
 
+    function extractDutyRate(dutyString) {
+      // Handle cases where the string is empty or a dash
+      if (dutyString === "" || dutyString === "-") {
+        return null;
+      }
+
+      // Check if the string is a range (e.g., "10-14%")
+      const rangeMatch = dutyString.match(/^(\d+)-(\d+)%$/);
+      if (rangeMatch) {
+        // If it's a range, return the max value
+        return parseInt(rangeMatch[2]);
+      }
+
+      // If it's a single percentage (e.g., "2%" or "12%"), extract the number
+      const singleMatch = dutyString.match(/^(\d+)%$/);
+      if (singleMatch) {
+        return parseInt(singleMatch[1]);
+      }
+
+      // If none of the above, return null (invalid format)
+      return null;
+    }
+
     // ! FETCH DUTY RATE FOR SELECTED PRODUCT
     getCustomDutiesFromPublic(selectedProduct["customsInfo"]["category"]).then(
       (duties) => {
-        // console.log(duties);
+        // Loop through each category and extract the duty rate
+        const dutiesArr = [];
         for (const category in duties) {
-          console.log(duties[category][0]["dutyRate"]);
+          const dutyRateString = duties[category][0]["dutyRate"];
+          const dutyRate = extractDutyRate(dutyRateString);
+          if (dutyRate !== null) {
+            // console.log(dutyRate);
+            dutiesArr.push(dutyRate); // Print the duty rate
+          } else {
+            console.log("Invalid duty rate format");
+          }
         }
+        // console.log(dutiesArr);
+        const maxDuty = Math.max(...dutiesArr);
+        setDutyRate(maxDuty);
       }
     );
 
@@ -360,12 +396,19 @@ const CreateOrderForm = () => {
   //   console.log(declaration);
   // };
 
+  const { userDetails, setUserDetails } = useContext(UserContext);
+  // console.log(userDetails);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     createDeclaration({
       formData,
       selectedProduct,
+      dutyRate,
+      rodtep,
       declaration,
+      userDetails,
+      setUserDetails,
       setDeclaration,
     });
 

@@ -38,3 +38,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/app/export-details/page2.tsx
+
+/app/create-order/page2.tsx
+/app/create-order/pageApi.tsx
+/app/create-order/tempPage.tsx
