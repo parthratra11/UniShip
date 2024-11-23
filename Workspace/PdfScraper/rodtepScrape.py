@@ -1,37 +1,42 @@
 import pdfplumber
 import json
 
-# Define a function to extract HS codes and RoDTEP rates
-def extract_hscode_rodtep(pdf_path):
-    data = []
+def clean_text(text):
+    """Clean text by removing unwanted spaces and newlines."""
+    return " ".join(text.split()) if text else ""
+
+def extract_data_from_pdf(pdf_path, output_json_path):
+    extracted_data = []
+
+    # Open the PDF file
     with pdfplumber.open(pdf_path) as pdf:
         for page in pdf.pages:
-            # Extract tables from the page
             tables = page.extract_tables()
+
             for table in tables:
                 for row in table:
-                    # Adjust indices as per table structure in the PDF
-                    if len(row) >= 3:  # Ensure the row has at least the required columns
-                        hs_code = row[0].strip()  # Tariff Item as per CTH
-                        rodtep_rate = row[1].strip()  # RoDTEP Rate as %age of FOB value
-                        rodtep_cap = row[2].strip()  # RoDTEP Cap (Rs. per UQC)
-                        # Append extracted data
-                        data.append({
-                            "HS Code": hs_code,
-                            "RoDTEP Rate (% of FOB Value)": rodtep_rate,
-                            "RoDTEP Cap (Rs. per UQC)": rodtep_cap
+                    if len(row) >= 5:  # Adjust based on actual columns
+                        tariff_code = clean_text(row[0])
+                        description = clean_text(row[1])
+                        uqc = clean_text(row[2])
+                        rodtep_rate = clean_text(row[3])
+                        cap = clean_text(row[4])
+
+                        extracted_data.append({
+                            "Tariff Code": tariff_code,
+                            "Description": description,
+                            "UQC": uqc,
+                            "RoDTEP Rate (%)": rodtep_rate,
+                            "Cap (Rs. Per UQC)": cap
                         })
-    return data
 
-# Path to the PDF file
-pdf_path = "rodtepPdf.pdf"
+    # Save extracted data to JSON
+    with open(output_json_path, 'w', encoding='utf-8') as json_file:
+        json.dump(extracted_data, json_file, ensure_ascii=False, indent=4)
 
-# Extract the data
-extracted_data = extract_hscode_rodtep(pdf_path)
+    print(f"Data extracted successfully to {output_json_path}")
 
-# Save extracted data to a JSON file
-output_json_path = "hs_code_rodtep.json"
-with open(output_json_path, "w") as json_file:
-    json.dump(extracted_data, json_file, indent=4)
-
-print(f"Data successfully extracted and saved to {output_json_path}")
+# Example usage
+pdf_path = "Appendix 4RE RoDTEP.pdf"  # Path to the uploaded PDF
+output_json_path = "rodtep_data.json"
+extract_data_from_pdf(pdf_path, output_json_path)

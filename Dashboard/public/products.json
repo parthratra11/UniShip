@@ -40,7 +40,8 @@
       "date": "2024-01-01",
       "manufacturingCountry": "India",
       "manufacturingState": "Delhi"
-    }
+    },
+    "certificateNo": "TS10012024"
   },
   {
     "id": 2,
@@ -82,7 +83,8 @@
       "date": "2024-02-15",
       "manufacturingCountry": "India",
       "manufacturingState": "Maharashtra"
-    }
+    },
+    "certificateNo": "DJ20242024"
   },
   {
     "id": 3,
@@ -123,7 +125,8 @@
       "date": "2024-03-10",
       "manufacturingCountry": "India",
       "manufacturingState": "Tamil Nadu"
-    }
+    },
+    "certificateNo": "BC5002024"
   },
   {
     "id": 4,
@@ -152,7 +155,8 @@
       "date": "2024-03-01",
       "manufacturingCountry": "India",
       "manufacturingState": "Punjab"
-    }
+    },
+    "certificateNo": "WT20242024"
   },
   {
     "id": 5,
@@ -181,6 +185,7 @@
       "date": "2024-04-01",
       "manufacturingCountry": "India",
       "manufacturingState": "Haryana"
-    }
+    },
+    "certificateNo": "OC3032024"
   }
 ]

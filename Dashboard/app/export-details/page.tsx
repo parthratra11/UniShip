@@ -125,14 +125,14 @@ const ExportIdDetails = () => {
 
                 <div>
                   <label className="block text-sm text-[#0F1111] mb-1">
-                    TIN
+                    AES ITN
                     <span className="text-[#B12704]">*</span>
                     <Link
                       href="https://www.tin-nsdl.com/"
                       target="_blank"
                       className="text-[#007185] hover:text-[#C7511F] hover:underline ml-1 text-xs"
                     >
-                      (Taxpayer Identification No.)
+                      (Internal Transaction No.)
                     </Link>
                   </label>
                   <input
