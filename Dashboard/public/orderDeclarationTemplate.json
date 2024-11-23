@@ -1,0 +1,49 @@
+{
+  "contents_type": "MERCHANDISE",
+  "contents_explanation": "",
+  "non_delivery_option": "RETURN",
+  "certify": true,
+  "certify_signer": "",
+  "incoterm": "DDP",
+  "items": [],
+  "exporter_reference": "",
+  "importer_reference": "",
+  "address_importer": {
+    "name": "",
+    "street1": "",
+    "city": "",
+    "state": "",
+    "zip": "",
+    "country": "",
+    "phone": "",
+    "email": ""
+  },
+  "invoice": "",
+  "commercial_invoice": true,
+  "license": "",
+  "certificate": "",
+  "notes": "",
+  "eel_pfc": "",
+  "aes_itn": "",
+  "disclaimer": "",
+  "duties_payor": {
+    "account": "",
+    "type": ""
+  },
+  "invoiced_charges": {
+    "total_shipping": 0,
+    "total_taxes": 0,
+    "total_duties": 0,
+    "other_fees": 0,
+    "currency": ""
+  },
+  "exporter_identification": {
+    "pan": "",
+    "vat_number": "",
+    "tax_id": {
+      "type": "",
+      "number": ""
+    }
+  },
+  "is_vat_collected": false
+}

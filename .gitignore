@@ -8,7 +8,9 @@ Workspace/TrackingMore
 
 Workspace/WebScraper/chromedriver.exe
 Workspace/WebScraper/scraper.py
+
 Workspace/Shippo/Labels/nRate.py
+Workspace/Shippo/Tracking
 
 Workspace/AmazonAPI
 
@@ -21,7 +23,7 @@ Workspace/Gmail/credentials.json
 Workspace/Gmail/token.json
 Workspace/Gmail/__pycache__
 
-Workspace/Shippo/Tracking
+Workspace/AiModel
 
 /extras
 .vscode

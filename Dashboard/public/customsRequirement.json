@@ -1,0 +1,191 @@
+{
+  "productType": {
+    "Apparel, Clothing, Textile, Cap": {
+      "requirements": {
+        "documents": [
+          "Export Invoice",
+          "Packing List",
+          "Certificate of Origin",
+          "Bill of Lading or Airway Bill",
+          "Export Declaration"
+        ],
+        "customDuties": {
+          "dutyRate": "10-14%",
+          "additionalDuties": ["Anti-dumping Duty", "Countervailing Duty"],
+          "harmonizedSystemCode": "6203, 6204, 6109"
+        },
+        "certifications": ["OEKO-TEX Standard 100", "REACH Compliance"],
+        "labeling": [
+          "Material Composition",
+          "Country of Origin",
+          "Care Instructions",
+          "Size Label"
+        ]
+      }
+    },
+    "Accessories, Gadgets": {
+      "requirements": {
+        "documents": [
+          "Export Invoice",
+          "Packing List",
+          "Certificate of Origin",
+          "Bill of Lading or Airway Bill",
+          "Export Declaration"
+        ],
+        "customDuties": {
+          "dutyRate": "8-12%",
+          "additionalDuties": ["Luxury Tax", "Countervailing Duty"],
+          "harmonizedSystemCode": "6505"
+        },
+        "certifications": ["OEKO-TEX Standard 100", "CPSIA for Child Safety"],
+        "labeling": [
+          "Material Composition",
+          "Country of Origin",
+          "Care Instructions"
+        ]
+      }
+    },
+    "Electronics": {
+      "requirements": {
+        "documents": [
+          "Export Invoice",
+          "Packing List",
+          "Certificate of Origin",
+          "Bill of Lading or Airway Bill",
+          "Export Declaration",
+          "Product Manual"
+        ],
+        "customDuties": {
+          "dutyRate": "15-20%",
+          "additionalDuties": ["Environmental Tax", "Excise Duty"],
+          "harmonizedSystemCode": "8471, 8542"
+        },
+        "certifications": [
+          "RoHS Compliance",
+          "FCC Certification",
+          "CE Marking"
+        ],
+        "labeling": [
+          "Brand Name",
+          "Model Number",
+          "Country of Origin",
+          "Safety Instructions"
+        ]
+      }
+    },
+    "Food and Beverages, Drinks": {
+      "requirements": {
+        "documents": [
+          "Export Invoice",
+          "Packing List",
+          "Certificate of Origin",
+          "Health Certificate",
+          "Phytosanitary Certificate"
+        ],
+        "customDuties": {
+          "dutyRate": "5-20%",
+          "harmonizedSystemCode": "2009, 2106, 2204"
+        },
+        "certifications": ["ISO 22000", "HACCP Certification"],
+        "labeling": [
+          "Ingredient List",
+          "Nutritional Information",
+          "Manufacturing Date",
+          "Expiry Date",
+          "Country of Origin"
+        ]
+      }
+    },
+    "Pharmaceuticals, Medicines, Drugs": {
+      "requirements": {
+        "documents": [
+          "Export Invoice",
+          "Packing List",
+          "Certificate of Origin",
+          "Certificate of Analysis",
+          "Drug Master File"
+        ],
+        "customDuties": {
+          "dutyRate": "5-10%",
+          "harmonizedSystemCode": "3004, 3003"
+        },
+        "certifications": [
+          "Good Manufacturing Practice (GMP)",
+          "WHO Certification",
+          "FDA Approval"
+        ],
+        "labeling": [
+          "Drug Name",
+          "Active Ingredients",
+          "Dosage Information",
+          "Manufacturing Date",
+          "Expiry Date",
+          "Storage Instructions"
+        ]
+      }
+    },
+    "Automotive, Cars, Two-Wheelers, Automobiles": {
+      "requirements": {
+        "documents": [
+          "Export Invoice",
+          "Packing List",
+          "Certificate of Origin",
+          "Bill of Lading or Airway Bill",
+          "Vehicle Type Approval Certificate"
+        ],
+        "customDuties": {
+          "dutyRate": "10-25%",
+          "additionalDuties": ["Carbon Tax", "Luxury Tax"],
+          "harmonizedSystemCode": "8703, 8708"
+        },
+        "certifications": [
+          "ISO 26262",
+          "ECE Compliance",
+          "Safety Test Certification"
+        ],
+        "labeling": [
+          "Chassis Number",
+          "Engine Number",
+          "Country of Origin",
+          "Emission Class"
+        ]
+      }
+    },
+    "Furniture, Chair, Table, Sofa, Bed, Couch": {
+      "requirements": {
+        "documents": [
+          "Export Invoice",
+          "Packing List",
+          "Certificate of Origin",
+          "Bill of Lading or Airway Bill"
+        ],
+        "customDuties": {
+          "dutyRate": "8-15%",
+          "harmonizedSystemCode": "9401, 9403"
+        },
+        "certifications": ["FSC Certification (if wood)", "ISO 9001"],
+        "labeling": [
+          "Material Composition",
+          "Country of Origin",
+          "Assembly Instructions"
+        ]
+      }
+    },
+    "Toys": {
+      "requirements": {
+        "documents": [
+          "Export Invoice",
+          "Packing List",
+          "Certificate of Origin",
+          "Product Safety Certificate"
+        ],
+        "customDuties": {
+          "dutyRate": "10-20%",
+          "harmonizedSystemCode": "9503"
+        },
+        "certifications": ["EN71", "CPSIA Compliance", "CE Marking"],
+        "labeling": ["Age Group", "Safety Instructions", "Country of Origin"]
+      }
+    }
+  }
+}

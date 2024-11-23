@@ -22,7 +22,7 @@ body = json.dumps({
   "non_delivery_option": "RETURN",
   "certify": True,
   "certify_signer": "Shrey Khanna",
-  "incoterm": "DAP",
+  "incoterm": "DDP",
   "items": [
     {
       "description": "Handcrafted Wooden Sculptures",
