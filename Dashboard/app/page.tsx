@@ -19,7 +19,8 @@ import {
   FaPlus,
 } from "react-icons/fa";
 import { IoNotifications } from "react-icons/io5";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 
 export default function Dashboard() {
@@ -257,15 +258,17 @@ export default function Dashboard() {
                 <IoNotifications className="text-xl text-gray-600" />
                 <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
               </button>
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 rounded-full bg-amazon-orange flex items-center justify-center">
-                  <FaUser className="text-white" />
+              <Link href="/user">
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 rounded-full bg-amazon-orange flex items-center justify-center">
+                    <FaUser className="text-white" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium">John Smith</p>
+                    <p className="text-xs text-gray-500">johnsmith@email.com</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm font-medium">John Smith</p>
-                  <p className="text-xs text-gray-500">johnsmith@email.com</p>
-                </div>
-              </div>
+              </Link>
             </div>
           </div>
         </header>

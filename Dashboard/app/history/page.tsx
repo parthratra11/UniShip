@@ -384,7 +384,6 @@ export default function History() {
   };
 
   const [showNotifications, setShowNotifications] = useState(false);
-  setShowNotifications(showNotifications);
   const [showDockAI, setShowDockAI] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const [selectedChat, setSelectedChat] = useState(null);

@@ -319,10 +319,8 @@ const CreateOrderForm = () => {
   const [products, setProducts] = useState([]);
   const [declaration, setDeclaration] = useState({});
   const [dutyRate, setDutyRate] = useState(0);
-  const [rodtep, setRodtep] = useState(0);
+  const [rodtep, setRodtep] = useState(0.1);
   const [qnaData, setQnaData] = useState([]);
-
-  setRodtep(0.1);
 
   useEffect(() => {
     // Fetch QnA data
@@ -465,7 +463,6 @@ const CreateOrderForm = () => {
     poc: [],
     others: [],
   });
-  setShowNotifications(false);
   const [newMessage, setNewMessage] = useState("");
   const [dockAIMessages, setDockAIMessages] = useState([
     {
