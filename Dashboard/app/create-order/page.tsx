@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { UserContext } from "../UserContext";
 import { useRouter } from "next/navigation";

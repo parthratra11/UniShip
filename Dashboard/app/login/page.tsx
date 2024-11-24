@@ -1,4 +1,7 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+import Link from "next/link";
 import React, { useState } from "react";
 import { FaBox, FaEnvelope, FaPhone } from "react-icons/fa";
 
@@ -134,13 +137,14 @@ const LoginPage = () => {
                   placeholder="Enter your password"
                 />
               </div>
-
-              <button
-                type="submit"
-                className="w-full bg-amazon-orange hover:bg-amazon text-white py-2 rounded transition-colors"
-              >
-                {isLogin ? "Sign In" : "Create Account"}
-              </button>
+              <Link href="/export-details">
+                <button
+                  type="submit"
+                  className="w-full bg-amazon-orange hover:bg-amazon text-white py-2 rounded transition-colors"
+                >
+                  {isLogin ? "Sign In" : "Create Account"}
+                </button>
+              </Link>
             </form>
           </div>
 

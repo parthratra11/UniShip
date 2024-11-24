@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { useState } from "react";
 import Link from "next/link";
@@ -7,7 +8,7 @@ const ExportIdDetails = () => {
   const [formData, setFormData] = useState({
     businessName: "",
     gstin: "",
-    iec: "", 
+    iec: "",
     pan: "",
     tin: "",
     registeredAddress: "",
@@ -161,7 +162,7 @@ const ExportIdDetails = () => {
                   name="registeredAddress"
                   value={formData.registeredAddress}
                   onChange={handleChange}
-                  rows={3}
+                  rows={5}
                   className="w-full px-3 py-1 border border-[#888C8C] rounded focus:border-[#E77600] focus:shadow-[0_0_3px_2px_rgb(228,121,17,50%)] focus:outline-none"
                   required
                 />
@@ -175,7 +176,7 @@ const ExportIdDetails = () => {
                   name="warehouseAddress"
                   value={formData.warehouseAddress}
                   onChange={handleChange}
-                  rows={3}
+                  rows={5}
                   className="w-full px-3 py-1 border border-[#888C8C] rounded focus:border-[#E77600] focus:shadow-[0_0_3px_2px_rgb(228,121,17,50%)] focus:outline-none"
                   placeholder="If different from registered address"
                 />
@@ -183,12 +184,14 @@ const ExportIdDetails = () => {
             </div>
 
             <div className="pt-4">
-              <button
-                type="submit"
-                className="w-full bg-[#FFD814] hover:bg-[#F7CA00] text-[#0F1111] py-1 px-4 rounded-md border border-[#FCD200] focus:outline-none focus:ring-2 focus:ring-[#F7CA00] shadow-sm"
-              >
-                Submit Details
-              </button>
+              <Link href="/">
+                <button
+                  type="submit"
+                  className="w-full bg-[#FFD814] hover:bg-[#F7CA00] text-[#0F1111] py-1 px-4 rounded-md border border-[#FCD200] focus:outline-none focus:ring-2 focus:ring-[#F7CA00] shadow-sm"
+                >
+                  Submit Details
+                </button>
+              </Link>
             </div>
           </form>
         </div>
