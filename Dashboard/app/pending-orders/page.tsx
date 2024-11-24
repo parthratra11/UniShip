@@ -102,7 +102,6 @@ export default function PendingOrders() {
   ];
 
   const [showNotifications, setShowNotifications] = useState(false);
-  setShowNotifications(false);
   const [showDockAI, setShowDockAI] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const [selectedChat, setSelectedChat] = useState(null);

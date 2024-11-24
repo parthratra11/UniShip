@@ -119,11 +119,9 @@ export default function CreateShipment() {
       },
     },
   ]);
-  setRates(rates);
 
   const [selectedRate, setSelectedRate] = useState<number | null>(null);
   const [activeChatIndex, setActiveChatIndex] = useState<number | null>(null);
-  setActiveChatIndex(null);
   const [carrierMessages, setCarrierMessages] = useState<{
     [key: number]: { text: string; sender: string }[];
   }>({});
@@ -201,7 +199,6 @@ Would you like me to help draft a negotiation message?`,
   };
 
   const [showNotifications, setShowNotifications] = useState(false);
-  setShowNotifications(false);
   const [showDockAI, setShowDockAI] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const [selectedChat, setSelectedChat] = useState(null);
