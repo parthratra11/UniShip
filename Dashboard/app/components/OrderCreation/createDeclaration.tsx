@@ -1,12 +1,13 @@
 "use client";
 
-import { UserContext } from "@/app/layout";
-import { UNDERSCORE_NOT_FOUND_ROUTE_ENTRY } from "next/dist/shared/lib/constants";
-import { decl } from "postcss";
-import React, { useContext, useState } from "react";
+// import { UserContext } from "@/app/UserContext";
+// import { UNDERSCORE_NOT_FOUND_ROUTE_ENTRY } from "next/dist/shared/lib/constants";
+// import { useRouter } from "next/router";
+// import { decl, Declaration } from "postcss";
+// import React, { useContext, useState } from "react";
 
-const axios = require("axios");
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
 
 // ! IMPORT FROM THE JSON FILE INSTEAD OF THIS
 const countryCodes = {
@@ -32,41 +33,6 @@ const countryCodes = {
   AE: "United Arab Emirates",
 };
 
-const declarationAPI = async (declaration) => {
-  const api_token = process.env.SHIPPO_TEST_API;
-  // console.log(api_token);
-
-  const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-  const url = "http://api.goshippo.com/customs/declarations";
-
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization: `ShippoToken ${api_token}`,
-    // "X-Requested-With": "XMLHttpRequest",
-  };
-  const body = declaration;
-
-  axios
-    .post(proxyUrl + url, body, { headers: headers })
-    .then((response) => {
-      // Loop through the results and find the matching invoice
-      const responseData = response.data;
-      const obj = [];
-      // console.log(responseData);
-
-      responseData.results.forEach((item) => {
-        if (item.invoice === body.invoice) {
-          // console.log(item.object_id);
-          obj.push(item.object_id);
-        }
-      });
-      console.log(obj[0]);
-    })
-    .catch((error) => {
-      console.error("Error making the request:", error);
-    });
-};
-
 const createDeclaration = ({
   formData,
   selectedProduct,
@@ -74,11 +40,10 @@ const createDeclaration = ({
   rodtep,
   declaration,
   userDetails,
+  router,
   setUserDetails,
   setDeclaration,
 }) => {
-  // console.log(userDetails);
-
   setUserDetails({
     iec: "IEC1234567890",
     aesitn: "AESITN12345",
@@ -87,6 +52,66 @@ const createDeclaration = ({
     phone: "9876543210",
     pan: "ABCDE1234F",
   });
+  // console.log(userDetails);
+
+  const declarationAPI = async () => {
+    // ! HIDE THIS
+    // const api_token = process.env.SHIPPO_TEST_API;
+    // console.log(api_token);
+
+    // const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+    // const url = "http://api.goshippo.com/customs/declarations";
+
+    // const headers = {
+    //   "Content-Type": "application/json",
+    //   Authorization: `ShippoToken ${api_token}`,
+    //   // "X-Requested-With": "XMLHttpRequest",
+    // };
+    // const body = declaration;
+
+    // !
+    // axios
+    //   .post(proxyUrl + url, body, { headers: headers })
+    //   .then((response) => {
+    //     // Loop through the results and find the matching invoice
+    //     const responseData = response.data;
+    //     const obj = [];
+    //     // console.log(responseData);
+
+    //     responseData.results.forEach((item) => {
+    //       if (item.invoice === body.invoice) {
+    //         // console.log(item.object_id);
+    //         obj.push(item.object_id);
+    //       }
+    //     });
+    //     console.log(obj[0]);
+    //     router.push("/rate-list");
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error making the request:", error);
+    //   });
+
+    // ! FIX THIS
+    const tempDeclaration = "be78d8454ae24c4ca838ca883d355dd2";
+
+    // console.log("selected product", selectedProduct);
+
+    const orderData = {
+      DeclarationNo: tempDeclaration,
+      FormData: formData,
+      UserDetails: userDetails,
+      Declaration: declaration,
+      SelectedProduct: selectedProduct,
+    };
+
+    sessionStorage.setItem("OrderData", JSON.stringify(orderData));
+
+    router.push("/rate-list");
+    // router.push({
+    //   pathname: "/rate-list",
+    //   query: { DeclarationNo: tempDeclaration },
+    // });
+  };
 
   declaration["contents_explanation"] = selectedProduct["productDescription"];
 
@@ -193,7 +218,11 @@ const createDeclaration = ({
   };
 
   console.log(declaration);
-  declarationAPI(declaration);
+  setDeclaration(declaration);
+  // sessionStorage.setItem("declaration", declaration);
+  // sessionStorage.setItem("formData", formData);
+  // sessionStorage.setItem("userDetails", userDetails);
+  declarationAPI();
 };
 
 export default createDeclaration;
