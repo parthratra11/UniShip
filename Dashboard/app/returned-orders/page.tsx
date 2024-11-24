@@ -1,33 +1,67 @@
 "use client";
+
+import Link from "next/link";
+import { useState } from "react";
 import {
-  FaShippingFast,
   FaBox,
+  FaExchangeAlt,
+  FaShippingFast,
   FaHistory,
-  FaChartLine,
+  FaBoxOpen,
   FaRobot,
   FaComments,
-  FaUser,
-  FaBoxOpen,
-  FaExchangeAlt,
   FaCog,
   FaSignOutAlt,
-  FaPaperPlane,
+  FaPlus,
+  FaUsers,
+  FaUserTie,
   FaWarehouse,
   FaTruck,
-  FaUserTie,
-  FaUsers,
-  FaPlus,
+  FaPaperPlane,
 } from "react-icons/fa";
-import { IoNotifications } from "react-icons/io5";
-import { useState } from "react";
-import Link from "next/link";
 
-export default function Dashboard() {
+export default function ReturnedOrders() {
+  // Filter cancelled orders from shipments data
+  const returnedOrders = [
+    {
+      id: "1597534862",
+      returnDate: "2024-11-23T12:00:00Z",
+      orderDate: "2024-11-23T12:00:00Z",
+      status: "Returned",
+      refundAmount: 200,
+      reason: "Order Cancelled",
+      items: [
+        {
+          name: "Furniture",
+          quantity: 1,
+          price: 200,
+          returnStatus: "Cancelled at Dallas, TX",
+        },
+      ],
+    },
+    {
+      id: "3216549870",
+      returnDate: "2024-11-22T18:00:00Z",
+      orderDate: "2024-11-22T18:00:00Z",
+      status: "Returned",
+      refundAmount: 80,
+      reason: "Order Cancelled",
+      items: [
+        {
+          name: "Cosmetics",
+          quantity: 1,
+          price: 80,
+          returnStatus: "Cancelled at Paris, France",
+        },
+      ],
+    },
+  ];
+
   const [showNotifications, setShowNotifications] = useState(false);
+  setShowNotifications(false);
   const [showDockAI, setShowDockAI] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const [selectedChat, setSelectedChat] = useState(null);
-
   const [messages, setMessages] = useState({
     carrier: [],
     warehouse: [],
@@ -137,10 +171,8 @@ export default function Dashboard() {
     }
   };
 
-  // const router = useRouter();
-
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen">
       {/* Left Sidebar */}
       <div className="w-64 bg-amazon shadow-lg flex flex-col">
         <Link href="/">
@@ -239,149 +271,99 @@ export default function Dashboard() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-auto">
-        <header className="bg-white shadow-amazon">
-          <div className="flex items-center justify-between p-4">
-            <div className="w-96">
-              <input
-                type="search"
-                placeholder="Track shipment..."
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amazon-orange focus:border-amazon-orange"
-              />
-            </div>
-            <div className="flex items-center space-x-6">
-              <button
-                onClick={() => setShowNotifications(!showNotifications)}
-                className="relative p-2 hover:bg-gray-100 rounded-full"
-              >
-                <IoNotifications className="text-xl text-gray-600" />
-                <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
-              </button>
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 rounded-full bg-amazon-orange flex items-center justify-center">
-                  <FaUser className="text-white" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium">John Smith</p>
-                  <p className="text-xs text-gray-500">johnsmith@email.com</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </header>
+      <div className="flex-1 min-h-screen bg-[#EAEDED] overflow-auto">
+        <div className="mx-auto max-w-[1500px] px-4 py-8">
+          <h1 className="mb-6 text-2xl font-medium text-[#232F3E]">
+            Returned Orders
+          </h1>
 
-        <div className="flex">
-          {/* Main Content Area */}
-          <div className="flex-1 p-6">
-            {/* Analytics Cards */}
-            <div className="grid grid-cols-3 gap-4 mb-6">
-              <div className="bg-white p-6 rounded-lg shadow-amazon border border-gray-200 hover:border-amazon-orange transition-colors">
-                <h3 className="text-amazon text-sm font-medium">
-                  Total Shipments
-                </h3>
-                <div className="flex flex-col items-start my-2">
-                  <span className="text-2xl font-bold text-amazon">1,234</span>
-                  <span className="text-green-600 text-sm">
-                    +9% vs last month
-                  </span>
+          {returnedOrders.map((order) => (
+            <div
+              key={order.id}
+              className="mb-6 rounded-lg bg-white p-6 shadow-sm border border-[#D5D9D9] hover:border-[#007185]"
+            >
+              <div className="border-b border-[#D5D9D9] pb-4">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
+                  <div>
+                    <p className="text-xs text-[#565959]">RETURN DATE</p>
+                    <p className="text-sm text-[#0F1111]">
+                      {new Date(order.returnDate).toLocaleDateString()}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-[#565959]">REFUND AMOUNT</p>
+                    <p className="text-sm text-[#0F1111]">
+                      ${order.refundAmount.toFixed(2)}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-[#565959]">RETURN REASON</p>
+                    <p className="text-sm text-[#0F1111]">{order.reason}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-[#565959]">ORDER # {order.id}</p>
+                    <button className="text-sm text-[#007185] hover:text-[#C7511F] hover:underline">
+                      View return details
+                    </button>
+                  </div>
                 </div>
               </div>
-              <div className="bg-white p-6 rounded-lg shadow-amazon border border-gray-200 hover:border-amazon-orange transition-colors">
-                <h3 className="text-amazon text-sm font-medium">Total Cost</h3>
-                <div className="flex flex-col items-start my-2">
-                  <span className="text-2xl font-bold text-amazon">
-                    ₹34,566.23
-                  </span>
-                  <span className="text-red-600 text-sm">
-                    -5% vs last month
-                  </span>
-                </div>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-amazon border border-gray-200 hover:border-amazon-orange transition-colors">
-                <h3 className="text-amazon text-sm font-medium">
-                  Avg. Delivery Time
-                </h3>
-                <div className="flex flex-col items-start my-2">
-                  <span className="text-2xl font-bold text-amazon">
-                    12 days
-                  </span>
-                  <span className="text-green-600 text-sm">
-                    -2 days vs last month
-                  </span>
-                </div>
-              </div>
-            </div>
 
-            {/* Shipment Analytics */}
-            <div className="bg-white p-6 rounded-lg shadow-amazon border border-gray-200 mb-6">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-medium text-amazon">
-                  Shipment Analytics
+              <div className="mt-4">
+                <h2 className="text-lg font-medium text-[#007185]">
+                  {order.status}
                 </h2>
-                <button
-                  onClick={() => (window.location.href = "/detailed-analytics")}
-                  className="text-amazon hover:text-amazon-orange transition-colors font-medium"
-                >
-                  View Detailed Analytics
-                </button>
-              </div>
-              <div className="h-64 bg-gray-50 rounded flex items-center justify-center">
-                <div className="text-center text-gray-500">
-                  <FaChartLine className="text-4xl mx-auto mb-2" />
-                  <p>Shipment Analytics Visualization</p>
+                <p className="mt-1 text-sm text-[#565959]">
+                  Original order date:{" "}
+                  {new Date(order.orderDate).toLocaleDateString()}
+                </p>
+
+                <div className="mt-4 space-y-4">
+                  {order.items.map((item, index) => (
+                    <div key={index} className="flex items-start gap-4">
+                      <div className="h-24 w-24 flex-shrink-0 bg-[#F7F8F8]"></div>
+                      <div className="flex-1">
+                        <h3 className="text-sm font-medium text-[#0F1111]">
+                          {item.name}
+                        </h3>
+                        <p className="mt-1 text-sm text-[#565959]">
+                          Quantity: {item.quantity}
+                        </p>
+                        <p className="mt-1 text-sm text-[#565959]">
+                          Status: {item.returnStatus}
+                        </p>
+                        <button className="mt-2 text-sm text-[#007185] hover:text-[#C7511F] hover:underline">
+                          Buy again
+                        </button>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-sm font-medium text-[#0F1111]">
+                          ${item.price.toFixed(2)}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-6 flex gap-4">
+                  <button className="rounded-lg bg-[#FFD814] px-6 py-2 text-sm font-medium text-[#0F1111] hover:bg-[#F7CA00] shadow-sm">
+                    Track return
+                  </button>
+                  <button className="rounded-lg border border-[#D5D9D9] px-6 py-2 text-sm font-medium text-[#0F1111] hover:bg-[#F7FAFA] shadow-sm">
+                    Contact support
+                  </button>
                 </div>
               </div>
             </div>
+          ))}
 
-            {/* Carrier Analytics */}
-            <div className="bg-white p-6 rounded-lg shadow-amazon border border-gray-200">
-              <h2 className="text-lg font-medium text-amazon mb-4">
-                Carrier Performance
-              </h2>
-              <div className="h-48 bg-gray-50 rounded flex items-center justify-center">
-                <div className="text-center text-gray-500">
-                  <FaChartLine className="text-4xl mx-auto mb-2" />
-                  <p>Carrier Analytics Chart</p>
-                </div>
-              </div>
+          {returnedOrders.length === 0 && (
+            <div className="rounded-lg bg-white p-8 text-center shadow-sm border border-[#D5D9D9]">
+              <h2 className="text-lg text-[#565959]">No returned orders</h2>
             </div>
-          </div>
-
-          {/* Right Sidebar - Shipment Updates */}
-          <div className="w-80 p-6 bg-white border-l border-gray-200">
-            <h2 className="text-lg font-medium text-amazon mb-4">
-              Recent Updates
-            </h2>
-            <div className="space-y-4">
-              <div className="p-3 bg-gray-50 rounded-lg">
-                <p className="text-sm font-medium">Shipment #SH12345</p>
-                <p className="text-sm text-gray-600">Out for delivery</p>
-                <span className="text-xs text-gray-500">5 minutes ago</span>
-              </div>
-              <div className="p-3 bg-gray-50 rounded-lg">
-                <p className="text-sm font-medium">Shipment #SH12346</p>
-                <p className="text-sm text-gray-600">
-                  Arrived at sorting facility
-                </p>
-                <span className="text-xs text-gray-500">1 hour ago</span>
-              </div>
-              <div className="p-3 bg-gray-50 rounded-lg">
-                <p className="text-sm font-medium">Shipment #SH12347</p>
-                <p className="text-sm text-gray-600">
-                  Customs clearance completed
-                </p>
-                <span className="text-xs text-gray-500">2 hours ago</span>
-              </div>
-              <div className="p-3 bg-gray-50 rounded-lg">
-                <p className="text-sm font-medium">Shipment #SH12348</p>
-                <p className="text-sm text-gray-600">Package picked up</p>
-                <span className="text-xs text-gray-500">3 hours ago</span>
-              </div>
-            </div>
-          </div>
+          )}
         </div>
       </div>
-
       {/* Floating DockAI Button */}
       <button
         onClick={() => setShowDockAI(!showDockAI)}

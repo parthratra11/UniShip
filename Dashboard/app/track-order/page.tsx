@@ -1,33 +1,104 @@
 "use client";
-import {
-  FaShippingFast,
-  FaBox,
-  FaHistory,
-  FaChartLine,
-  FaRobot,
-  FaComments,
-  FaUser,
-  FaBoxOpen,
-  FaExchangeAlt,
-  FaCog,
-  FaSignOutAlt,
-  FaPaperPlane,
-  FaWarehouse,
-  FaTruck,
-  FaUserTie,
-  FaUsers,
-  FaPlus,
-} from "react-icons/fa";
-import { IoNotifications } from "react-icons/io5";
+
 import { useState } from "react";
+import {
+  FaArrowLeft,
+  FaBox,
+  FaBoxOpen,
+  FaCog,
+  FaComments,
+  FaExchangeAlt,
+  FaHistory,
+  FaPaperPlane,
+  FaPlus,
+  FaRobot,
+  FaShippingFast,
+  FaSignOutAlt,
+  FaTruck,
+  FaUsers,
+  FaUserTie,
+  FaWarehouse,
+} from "react-icons/fa";
 import Link from "next/link";
 
-export default function Dashboard() {
+interface TrackingEvent {
+  status: string;
+  timestamp: string;
+  location: string;
+}
+
+interface TrackingData {
+  tracking_number: string;
+  carrier: string;
+  status: string;
+  tracking_history: TrackingEvent[];
+  recipient: {
+    name: string;
+    address: string;
+  };
+  sender: {
+    name: string;
+    address: string;
+  };
+  shipment_details: {
+    weight: string;
+    dimensions: string;
+    value: string;
+    description: string;
+  };
+  delivery_confirmation: {
+    signature: string;
+    signed_at: string;
+  };
+  carrier_contact: {
+    phone: string;
+    email: string;
+  };
+}
+
+export default function TrackingOrders() {
+  const [trackingData, setTrackingData] = useState<TrackingData>({
+    tracking_number: "DJ20242024",
+    carrier: "UniShip",
+    status: "ORDER_CREATED",
+    tracking_history: [
+      {
+        status: "ORDER_CREATED",
+        timestamp: new Date().toISOString(),
+        location: "Mumbai, Maharashtra",
+      },
+    ],
+    recipient: {
+      name: "Customer",
+      address: "Delivery Address",
+    },
+    sender: {
+      name: "DenimHub",
+      address: "Mumbai, Maharashtra",
+    },
+    shipment_details: {
+      weight: "0.8kg",
+      dimensions: "40x30x3 cm",
+      value: "2000 INR",
+      description: "Classic fit denim jeans - DenimHub DJ2024",
+    },
+    delivery_confirmation: {
+      signature: "Pending",
+      signed_at: "",
+    },
+    carrier_contact: {
+      phone: "+91 1800 000 0000",
+      email: "support@uniship.com",
+    },
+  });
+
+  setTrackingData(trackingData);
+
   const [showNotifications, setShowNotifications] = useState(false);
+  setShowNotifications(false);
   const [showDockAI, setShowDockAI] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const [selectedChat, setSelectedChat] = useState(null);
-
   const [messages, setMessages] = useState({
     carrier: [],
     warehouse: [],
@@ -137,12 +208,10 @@ export default function Dashboard() {
     }
   };
 
-  // const router = useRouter();
-
   return (
-    <div className="flex h-screen bg-gray-50">
-      {/* Left Sidebar */}
-      <div className="w-64 bg-amazon shadow-lg flex flex-col">
+    <div className="min-h-screen bg-[#EAEDED] flex">
+      {/* Sidebar */}
+      <div className="w-64 bg-amazon shadow-lg flex flex-col flex-shrink-0">
         <Link href="/">
           <div className="p-4 flex items-center space-x-3">
             <FaBox className="text-amazon-orange text-2xl" />
@@ -239,143 +308,173 @@ export default function Dashboard() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-auto">
-        <header className="bg-white shadow-amazon">
-          <div className="flex items-center justify-between p-4">
-            <div className="w-96">
-              <input
-                type="search"
-                placeholder="Track shipment..."
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amazon-orange focus:border-amazon-orange"
-              />
+      <div className="flex-1 p-8">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-2xl font-medium text-[#0F1111]">
+            Track Your Shipment
+          </h1>
+          <Link
+            href="/"
+            className="flex items-center px-4 py-2 text-sm font-medium text-[#0F1111] bg-[#FFD814] rounded-lg hover:bg-[#F7CA00] border border-[#FCD200]"
+          >
+            <FaArrowLeft className="mr-2" />
+            Back to Homepage
+          </Link>
+        </div>
+
+        <div className="bg-white shadow-sm rounded-lg border border-[#D5D9D9]">
+          {/* Header Section */}
+          <div className="border-b border-[#D5D9D9] p-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div>
+                <p className="text-sm text-[#565959]">Tracking Number</p>
+                <p className="text-lg font-medium text-[#0F1111]">
+                  {trackingData.tracking_number}
+                </p>
+              </div>
+              <div>
+                <p className="text-sm text-[#565959]">Carrier</p>
+                <p className="text-lg font-medium text-[#0F1111]">
+                  {trackingData.carrier.toUpperCase()}
+                </p>
+              </div>
+              <div>
+                <p className="text-sm text-[#565959]">Status</p>
+                <p className="text-lg font-medium text-[#007185]">
+                  {trackingData.status.replace("_", " ")}
+                </p>
+              </div>
+              <div>
+                <p className="text-sm text-[#565959]">Expected Delivery</p>
+                <p className="text-lg font-medium text-[#0F1111]">
+                  {new Date(
+                    new Date().setDate(new Date().getDate() + 3)
+                  ).toLocaleDateString()}
+                </p>
+              </div>
             </div>
-            <div className="flex items-center space-x-6">
-              <button
-                onClick={() => setShowNotifications(!showNotifications)}
-                className="relative p-2 hover:bg-gray-100 rounded-full"
-              >
-                <IoNotifications className="text-xl text-gray-600" />
-                <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
-              </button>
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 rounded-full bg-amazon-orange flex items-center justify-center">
-                  <FaUser className="text-white" />
+          </div>
+
+          {/* Tracking Timeline and Product Info */}
+          <div className="p-6 border-b border-[#D5D9D9] grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h2 className="text-lg font-medium mb-4 text-[#0F1111]">
+                Tracking History
+              </h2>
+              <div className="space-y-6">
+                {trackingData.tracking_history.map((event, index) => (
+                  <div key={index} className="flex items-start">
+                    <div className="flex flex-col items-center">
+                      <div className="w-4 h-4 bg-[#FF9900] rounded-full"></div>
+                      {index !== trackingData.tracking_history.length - 1 && (
+                        <div className="w-0.5 h-16 bg-[#D5D9D9]"></div>
+                      )}
+                    </div>
+                    <div className="ml-4">
+                      <p className="font-medium text-[#0F1111]">
+                        {event.status.replace("_", " ")}
+                      </p>
+                      <p className="text-sm text-[#565959]">
+                        {new Date(event.timestamp).toLocaleString()}
+                      </p>
+                      <p className="text-sm text-[#565959]">{event.location}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-lg font-medium mb-4 text-[#0F1111]">
+                Product Information
+              </h2>
+              <div className="bg-[#F7F8F8] rounded-lg p-4">
+                <div className="w-full h-48 bg-white rounded-lg mb-4 flex items-center justify-center">
+                  <img
+                    src="/jeans-image.jpg"
+                    alt="Product"
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </div>
+                <h3 className="text-lg font-medium text-[#0F1111] mb-2">
+                  {trackingData.shipment_details.description}
+                </h3>
+                <p className="text-sm text-[#565959] mb-2">
+                  Classic fit denim jeans crafted from durable denim fabric.
+                  Designed for comfort and style with a variety of color
+                  options.
+                </p>
+                <p className="text-sm text-[#565959]">
+                  Value: {trackingData.shipment_details.value}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Shipment Details */}
+          <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h2 className="text-lg font-medium mb-4 text-[#0F1111]">
+                Shipment Details
+              </h2>
+              <div className="space-y-3">
+                <div>
+                  <p className="text-sm text-[#565959]">Weight</p>
+                  <p className="text-[#0F1111]">
+                    {trackingData.shipment_details.weight}
+                  </p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium">John Smith</p>
-                  <p className="text-xs text-gray-500">johnsmith@email.com</p>
+                  <p className="text-sm text-[#565959]">Dimensions</p>
+                  <p className="text-[#0F1111]">
+                    {trackingData.shipment_details.dimensions}
+                  </p>
                 </div>
-              </div>
-            </div>
-          </div>
-        </header>
-
-        <div className="flex">
-          {/* Main Content Area */}
-          <div className="flex-1 p-6">
-            {/* Analytics Cards */}
-            <div className="grid grid-cols-3 gap-4 mb-6">
-              <div className="bg-white p-6 rounded-lg shadow-amazon border border-gray-200 hover:border-amazon-orange transition-colors">
-                <h3 className="text-amazon text-sm font-medium">
-                  Total Shipments
-                </h3>
-                <div className="flex flex-col items-start my-2">
-                  <span className="text-2xl font-bold text-amazon">1,234</span>
-                  <span className="text-green-600 text-sm">
-                    +9% vs last month
-                  </span>
+                <div>
+                  <p className="text-sm text-[#565959]">Value</p>
+                  <p className="text-[#0F1111]">
+                    {trackingData.shipment_details.value}
+                  </p>
                 </div>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-amazon border border-gray-200 hover:border-amazon-orange transition-colors">
-                <h3 className="text-amazon text-sm font-medium">Total Cost</h3>
-                <div className="flex flex-col items-start my-2">
-                  <span className="text-2xl font-bold text-amazon">
-                    ₹34,566.23
-                  </span>
-                  <span className="text-red-600 text-sm">
-                    -5% vs last month
-                  </span>
-                </div>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-amazon border border-gray-200 hover:border-amazon-orange transition-colors">
-                <h3 className="text-amazon text-sm font-medium">
-                  Avg. Delivery Time
-                </h3>
-                <div className="flex flex-col items-start my-2">
-                  <span className="text-2xl font-bold text-amazon">
-                    12 days
-                  </span>
-                  <span className="text-green-600 text-sm">
-                    -2 days vs last month
-                  </span>
+                <div>
+                  <p className="text-sm text-[#565959]">Description</p>
+                  <p className="text-[#0F1111]">
+                    {trackingData.shipment_details.description}
+                  </p>
                 </div>
               </div>
             </div>
 
-            {/* Shipment Analytics */}
-            <div className="bg-white p-6 rounded-lg shadow-amazon border border-gray-200 mb-6">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-medium text-amazon">
-                  Shipment Analytics
-                </h2>
-                <button
-                  onClick={() => (window.location.href = "/detailed-analytics")}
-                  className="text-amazon hover:text-amazon-orange transition-colors font-medium"
-                >
-                  View Detailed Analytics
-                </button>
-              </div>
-              <div className="h-64 bg-gray-50 rounded flex items-center justify-center">
-                <div className="text-center text-gray-500">
-                  <FaChartLine className="text-4xl mx-auto mb-2" />
-                  <p>Shipment Analytics Visualization</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Carrier Analytics */}
-            <div className="bg-white p-6 rounded-lg shadow-amazon border border-gray-200">
-              <h2 className="text-lg font-medium text-amazon mb-4">
-                Carrier Performance
+            <div>
+              <h2 className="text-lg font-medium mb-4 text-[#0F1111]">
+                Contact Information
               </h2>
-              <div className="h-48 bg-gray-50 rounded flex items-center justify-center">
-                <div className="text-center text-gray-500">
-                  <FaChartLine className="text-4xl mx-auto mb-2" />
-                  <p>Carrier Analytics Chart</p>
+              <div className="space-y-4">
+                <div>
+                  <p className="text-sm text-[#565959]">Sender</p>
+                  <p className="text-[#0F1111]">{trackingData.sender.name}</p>
+                  <p className="text-sm text-[#565959]">
+                    {trackingData.sender.address}
+                  </p>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Sidebar - Shipment Updates */}
-          <div className="w-80 p-6 bg-white border-l border-gray-200">
-            <h2 className="text-lg font-medium text-amazon mb-4">
-              Recent Updates
-            </h2>
-            <div className="space-y-4">
-              <div className="p-3 bg-gray-50 rounded-lg">
-                <p className="text-sm font-medium">Shipment #SH12345</p>
-                <p className="text-sm text-gray-600">Out for delivery</p>
-                <span className="text-xs text-gray-500">5 minutes ago</span>
-              </div>
-              <div className="p-3 bg-gray-50 rounded-lg">
-                <p className="text-sm font-medium">Shipment #SH12346</p>
-                <p className="text-sm text-gray-600">
-                  Arrived at sorting facility
-                </p>
-                <span className="text-xs text-gray-500">1 hour ago</span>
-              </div>
-              <div className="p-3 bg-gray-50 rounded-lg">
-                <p className="text-sm font-medium">Shipment #SH12347</p>
-                <p className="text-sm text-gray-600">
-                  Customs clearance completed
-                </p>
-                <span className="text-xs text-gray-500">2 hours ago</span>
-              </div>
-              <div className="p-3 bg-gray-50 rounded-lg">
-                <p className="text-sm font-medium">Shipment #SH12348</p>
-                <p className="text-sm text-gray-600">Package picked up</p>
-                <span className="text-xs text-gray-500">3 hours ago</span>
+                <div>
+                  <p className="text-sm text-[#565959]">Recipient</p>
+                  <p className="text-[#0F1111]">
+                    {trackingData.recipient.name}
+                  </p>
+                  <p className="text-sm text-[#565959]">
+                    {trackingData.recipient.address}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-[#565959]">Carrier Contact</p>
+                  <p className="text-[#0F1111]">
+                    {trackingData.carrier_contact.phone}
+                  </p>
+                  <p className="text-sm text-[#565959]">
+                    {trackingData.carrier_contact.email}
+                  </p>
+                </div>
               </div>
             </div>
           </div>

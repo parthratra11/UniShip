@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { FaBox, FaEnvelope, FaPhone, FaLock } from "react-icons/fa";
+import { FaBox, FaEnvelope, FaPhone } from "react-icons/fa";
 
 const LoginPage = () => {
   const [isLogin, setIsLogin] = useState(true);

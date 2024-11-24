@@ -1,0 +1,28 @@
+{
+  "tracking_number": "",
+  "carrier": "",
+  "status": "",
+  "tracking_history": [],
+  "recipient": {
+    "name": "",
+    "address": ""
+  },
+  "sender": {
+    "name": "",
+    "address": ""
+  },
+  "shipment_details": {
+    "weight": "",
+    "dimensions": "",
+    "value": "",
+    "description": ""
+  },
+  "delivery_confirmation": {
+    "signature": "",
+    "signed_at": ""
+  },
+  "carrier_contact": {
+    "phone": "",
+    "email": ""
+  }
+}

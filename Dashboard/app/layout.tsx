@@ -1,26 +1,23 @@
 "use client";
 import "./globals.css";
+import { useState } from "react";
+import { UserContext } from "./UserContext"; // Adjust the path as needed
 
-import { createContext, useState } from "react";
-
-export const UserContext = createContext({
-  userDetails: {
-    iec: "",
-    aesitn: "",
-    gstin: "",
-    email: "",
-    phone: "",
-    pan: "",
-  },
-  setUserDetails: (details: any) => {},
-});
+interface UserDetails {
+  iec: string;
+  aesitn: string;
+  gstin: string;
+  email: string;
+  phone: string;
+  pan: string;
+}
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [userDetails, setUserDetails] = useState({
+  const [userDetails, setUserDetails] = useState<UserDetails>({
     iec: "",
     aesitn: "",
     gstin: "",

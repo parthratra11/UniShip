@@ -1,0 +1,209 @@
+{
+  "shipments": [
+    {
+      "tracking_number": "1234567890",
+      "carrier": "fedex",
+      "status": "DELIVERED",
+      "tracking_history": [
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2024-11-20T10:00:00Z",
+          "location": "New York, NY"
+        },
+        {
+          "status": "IN_TRANSIT",
+          "timestamp": "2024-11-22T15:00:00Z",
+          "location": "Chicago, IL"
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2024-11-23T14:30:00Z",
+          "location": "San Francisco, CA"
+        }
+      ],
+      "recipient": {
+        "name": "John Doe",
+        "address": "789 Delivery St., San Francisco, CA"
+      },
+      "sender": {
+        "name": "Jane Smith",
+        "address": "123 Sender Rd., New York, NY"
+      },
+      "shipment_details": {
+        "weight": "2kg",
+        "dimensions": "30x20x15 cm",
+        "value": "$50",
+        "description": "Laptop"
+      },
+      "delivery_confirmation": {
+        "signature": "John Doe",
+        "signed_at": "2024-11-23T14:30:00Z"
+      },
+      "carrier_contact": {
+        "phone": "+1 800 123 4567",
+        "email": "support@fedex.com"
+      }
+    },
+    {
+      "tracking_number": "9876543210",
+      "carrier": "ups",
+      "status": "IN_TRANSIT",
+      "tracking_history": [
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2024-11-21T11:00:00Z",
+          "location": "Los Angeles, CA"
+        },
+        {
+          "status": "IN_TRANSIT",
+          "timestamp": "2024-11-23T09:00:00Z",
+          "location": "Houston, TX"
+        }
+      ],
+      "recipient": {
+        "name": "Alice Cooper",
+        "address": "456 Customer St., Houston, TX"
+      },
+      "sender": {
+        "name": "Bob Brown",
+        "address": "890 Sender Ave., Los Angeles, CA"
+      },
+      "shipment_details": {
+        "weight": "5kg",
+        "dimensions": "40x30x20 cm",
+        "value": "$150",
+        "description": "Books and Stationery"
+      },
+      "delivery_confirmation": {
+        "signature": "N/A",
+        "signed_at": "N/A"
+      },
+      "carrier_contact": {
+        "phone": "+1 800 654 3210",
+        "email": "support@ups.com"
+      }
+    },
+    {
+      "tracking_number": "2468135790",
+      "carrier": "usps",
+      "status": "OUT_FOR_DELIVERY",
+      "tracking_history": [
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2024-11-19T08:30:00Z",
+          "location": "Miami, FL"
+        },
+        {
+          "status": "IN_TRANSIT",
+          "timestamp": "2024-11-21T10:00:00Z",
+          "location": "Atlanta, GA"
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2024-11-23T07:00:00Z",
+          "location": "Tampa, FL"
+        }
+      ],
+      "recipient": {
+        "name": "George Martin",
+        "address": "123 Customer Blvd, Tampa, FL"
+      },
+      "sender": {
+        "name": "Rachel Green",
+        "address": "456 Sender Ln, Miami, FL"
+      },
+      "shipment_details": {
+        "weight": "1kg",
+        "dimensions": "20x15x10 cm",
+        "value": "$25",
+        "description": "Clothes"
+      },
+      "delivery_confirmation": {
+        "signature": "N/A",
+        "signed_at": "N/A"
+      },
+      "carrier_contact": {
+        "phone": "+1 800 222 1811",
+        "email": "support@usps.com"
+      }
+    },
+    {
+      "tracking_number": "1122334455",
+      "carrier": "dhl",
+      "status": "DELIVERED",
+      "tracking_history": [
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2024-11-19T12:30:00Z",
+          "location": "Berlin, Germany"
+        },
+        {
+          "status": "IN_TRANSIT",
+          "timestamp": "2024-11-20T15:30:00Z",
+          "location": "Paris, France"
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2024-11-22T13:00:00Z",
+          "location": "London, UK"
+        }
+      ],
+      "recipient": {
+        "name": "Liam Brown",
+        "address": "987 Recipient St., London, UK"
+      },
+      "sender": {
+        "name": "Eva White",
+        "address": "123 Sender Rd., Berlin, Germany"
+      },
+      "shipment_details": {
+        "weight": "3kg",
+        "dimensions": "50x40x25 cm",
+        "value": "$100",
+        "description": "Electronics"
+      },
+      "delivery_confirmation": {
+        "signature": "Liam Brown",
+        "signed_at": "2024-11-22T13:05:00Z"
+      },
+      "carrier_contact": {
+        "phone": "+44 800 800 8000",
+        "email": "support@dhl.com"
+      }
+    },
+    {
+      "tracking_number": "5678901234",
+      "carrier": "fedex",
+      "status": "PENDING",
+      "tracking_history": [
+        {
+          "status": "CREATED",
+          "timestamp": "2024-11-23T10:00:00Z",
+          "location": "Los Angeles, CA"
+        }
+      ],
+      "recipient": {
+        "name": "Eleanor Rigby",
+        "address": "123 Main St, San Diego, CA"
+      },
+      "sender": {
+        "name": "Paul McCartney",
+        "address": "456 Park Ave, Los Angeles, CA"
+      },
+      "shipment_details": {
+        "weight": "4kg",
+        "dimensions": "35x25x20 cm",
+        "value": "$75",
+        "description": "Guitar"
+      },
+      "delivery_confirmation": {
+        "signature": "N/A",
+        "signed_at": "N/A"
+      },
+      "carrier_contact": {
+        "phone": "+1 800 123 4567",
+        "email": "support@fedex.com"
+      }
+    }
+  ]
+}

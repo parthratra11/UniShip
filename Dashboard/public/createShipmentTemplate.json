@@ -1,0 +1,39 @@
+{
+  "object_purpose": "PURCHASE",
+  "address_from": {
+    "name": "",
+    "street1": "",
+    "street2": "",
+    "street3": "",
+    "city": "",
+    "state": "",
+    "zip": "",
+    "country": "",
+    "phone": "",
+    "email": ""
+  },
+  "address_to": {
+    "name": "",
+    "street1": "",
+    "street2": "",
+    "street3": "",
+    "city": "",
+    "state": "",
+    "zip": "",
+    "country": "",
+    "phone": "",
+    "email": ""
+  },
+  "parcels": [
+    {
+      "length": "",
+      "width": "",
+      "height": "",
+      "distance_unit": "",
+      "weight": "",
+      "mass_unit": ""
+    }
+  ],
+  "custom_declaration": "",
+  "async": false
+}
